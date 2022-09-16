@@ -1,0 +1,10 @@
+Package: pcaprojection
+Type: Package
+Title: Projection Based on Principal Component Analysis
+Version: 0.1.0
+Author: Venustiano Soancatl Aguilar
+Maintainer: Venustiano Soancatl Aguilar <v.soancatl.aguilar@rug.nl>
+Description: Given n numeric columns, this method computes principal component analysis and creates a projection by using the first two principal components.
+License: Apache License (>= 2)
+Encoding: UTF-8
+LazyData: true
