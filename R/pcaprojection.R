@@ -3,13 +3,13 @@
 #' @param lparams The list of parameters to be validated
 #' @export
 validate_parameters <- function(lparams){
-  v <- jsonvalidate::json_validator("R/pca_projection_schema.json")
+  v <- jsonvalidate::json_validator(system.file("extdata","pca_projection_schema.json",package = "pcaprojection"))
   v(jsonlite::toJSON(lparams,auto_unbox = TRUE),verbose=TRUE)
 }
 
 #' Projection based on principal component analysis
 #'
-pcaproj <- function(parametersfile = "tests/parameters.json"){
+pcaproj <- function(parametersfile){
 
   tryCatch(lp <- jsonlite::fromJSON(parametersfile),
            error = function(c) {
