@@ -1,0 +1,13 @@
+{
+  "filename":"tests/exergamingresults.csv",
+  "col_ids": ["medLrms51","medTI51","medK","medSpeed","medTIms51","old"],
+  "colour": "old",
+	"scale": true,
+	"biplot": true,
+	"height": 10,
+	"width": 15,
+	"title":"Older vs Younger",
+	"caption": "PCA projection",
+	"save":false,
+	"device": "png"
+}
