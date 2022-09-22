@@ -72,3 +72,12 @@ pcaproj <- function(parametersfile){
     print(paste("Projection saved in: ",outputfile))
   }
 }
+
+
+wide2long <- function(filename){
+  if (!file.exists(filename)){
+    stop(paste("File",filename,"does not exist"))
+  }
+}
+
+# TODO: create functions to display the required parameters in json structure
