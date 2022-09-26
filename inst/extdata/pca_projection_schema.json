@@ -74,6 +74,12 @@
 	    "type": "string",
 	    "enum": [ "eps", "ps", "tex", "pdf", "jpeg", "tiff", "png", "bmp", "svg"],
 	    "default": "pdf"
+	  },
+    "interactive": {
+	    "title": "Interactive version",
+	    "type": "boolean",
+	    "default": false,
+	    "required": true
 	  }
 	}
 }

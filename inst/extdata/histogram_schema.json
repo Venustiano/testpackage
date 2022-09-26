@@ -1,0 +1,59 @@
+{
+  "type":"object",
+  "properties": {
+    "filename": {
+      "title": "Filename",
+      "description": "File in table format, see the data.table::fread function for more details",
+      "type": "string",
+      "required": true
+    },
+    "col_id": {
+      "title": "Column name",
+      "description": "Columns/variable name to create the histogram",
+      "type": "string",
+      "required": true
+    },
+    "group": {
+      "title": "Group",
+      "description": "Columns/variable name to create groups",
+      "type": "string",
+    },
+    "colour": {
+      "title": "Colour",
+      "description": "Line color of the histogram",
+      "type": "string"
+    },
+    "fill": {
+      "title": "Fill",
+      "description": "Color to fill the histogram bars",
+      "type": "string"
+    },
+    "alpha": {
+      "title": "Alpha",
+      "description": "Transparency level",
+	    "type": "number",
+	    "default":0.5,
+	    "minimum":0,
+	    "maximum":1,
+	    "required": true
+    },
+    "save": {
+	    "title": "Save file?",
+	    "type": "boolean",
+	    "default": false,
+	    "required": true
+	  },
+	  "device": {
+	    "title": "Device",
+	    "type": "string",
+	    "enum": [ "eps", "ps", "tex", "pdf", "jpeg", "tiff", "png", "bmp", "svg"],
+	    "default": "pdf"
+	  },
+    "interactive": {
+	    "title": "Interactive version",
+	    "type": "boolean",
+	    "default": false,
+	    "required": true
+	  }
+  }
+}
