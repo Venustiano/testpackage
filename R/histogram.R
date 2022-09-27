@@ -28,12 +28,6 @@ histogram <- function(parametersfile){
   cgroup <- lp$group
   print(cgroup)
 
-  # TODO: validate the lp$group exists
-  # if (!exists(lp$group)) {
-  #   cgroup = NULL
-  # }
-  # print(cgroup)
-
   histcol <- lp$col_id
   histcol <- c(histcol,cgroup)
 
@@ -46,6 +40,14 @@ histogram <- function(parametersfile){
            }
   )
 
+  if (! lp$col_id %in% colnames(cols) ) {
+    stop(paste("'col_id' must be a column in",lp$filename))
+  }
+
+  if (! lp$group %in% colnames(cols) ) {
+    stop(paste("'group' must be a column in",lp$filename))
+  }
+
   print(str(cols))
 
   p <- ggplot2::ggplot(data = cols, ggplot2::aes_string(x = lp$col_id,
@@ -54,17 +56,40 @@ histogram <- function(parametersfile){
     ggplot2::geom_histogram(color=colorear,alpha=lp$alpha) + ggplot2::theme_bw()
   p <- p + ggplot2::labs(title = lp$title,caption = lp$caption)
   p <- p + ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+  now <- Sys.time()
   if (lp$save==TRUE){
-    now <- Sys.time()
-    outputfile <- file.path(paste0(lp$filename,"-pca-",format(now, "%Y%m%d_%H%M%S"),".",lp$device))
+    outputfile <- file.path(paste0(lp$filename,"-hist-",format(now, "%Y%m%d_%H%M%S"),".",lp$device))
     ggplot2::ggsave(outputfile,plot=p, device= lp$device,  width = lp$width,
                     height =lp$height, units = "cm")
     print(paste("Histogram saved in: ",outputfile))
-    if (lp$interactive == TRUE) {
-      print("Creating interactive plot")
-      ip <- plotly::ggplotly(p,height = lp$height*38, width = lp$width*38)
-      htmlwidgets::saveWidget(ip, "../test.html")
-    }
+  }
+  if (lp$interactive == TRUE) {
+    print("Creating interactive plot ...")
+    outputfile <- file.path(paste0(lp$filename,"-hist-",format(now, "%Y%m%d_%H%M%S"),".html"))
+    ip <- plotly::ggplotly(p)
+    htmlwidgets::saveWidget(ip, outputfile)
   }
   p
+}
+
+
+hist_params <- function(){
+  json_params <- '{
+    "filename": "<path/filename>",
+    "col_id": "<varname>",
+    "group": "<vargroup>",
+    "colour": "black",
+    "fill": "lightblue",
+    "alpha": 0.5,
+	  "height": 10,
+	  "width": 15,
+	  "title": "Title",
+	  "caption":"Caption",
+    "save": false,
+    "device":"pdf",
+    "interactive":false
+  }'
+
+  djson <- jsonlite::prettify(json_params)
+  djson
 }

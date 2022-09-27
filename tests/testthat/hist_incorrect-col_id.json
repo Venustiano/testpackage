@@ -1,0 +1,15 @@
+{
+    "filename": "iris.csv",
+    "col_id": "length",
+    "group": "species",
+    "colour": "black",
+    "fill": "",
+    "alpha": 0.5,
+	  "height": 10,
+	  "width": 15,
+	  "title": "Title",
+	  "caption":"Caption",
+    "save": false,
+    "device":"pdf",
+    "interactive":true
+}
