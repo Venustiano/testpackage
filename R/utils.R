@@ -3,17 +3,21 @@
 #' @param lparams The list of parameters to be validated
 #' @export
 validate_parameters <- function(params,pschema="pca_projection_schema.json"){
-  jsonvalidate::json_validate(params,system.file("extdata",pschema,
-                                                 package = "pcaprojection"
-  ),verbose=TRUE,error=TRUE)
+  jsonvalidate::json_validate(params,
+                              system.file("extdata",
+                                          pschema,
+                                          package = "pcaprojection"
+                                          ),
+                              verbose=TRUE,
+                              error=TRUE)
 }
 
 #' Title
-#' Reads columns from a data table
+#' Reads columns from a file in table format
 #'
 #' Additional info
-#' @param filename a string filename including the relative
-#' @param select_columns a vector including the column names from the data file
+#' @param filename a string data file name including the relative path
+#' @param select_columns a vector including the column names to be read from the data file
 #'
 #' @return if succeds, this function returns a data table
 #' @export
@@ -24,9 +28,41 @@ read_data <- function(filename,select_columns){
            error = function(c) {
              c$message <- paste0(c$message, " (in ", parametersfile, ")")
              stop(c)
-           }
+             },
+           warning = function(c) {
+             c
+             }
   )
-  cols
+}
+
+validate_json_file <- function(fileparams) {
+  if (file.exists(fileparams)){
+    tryCatch(lp <-  jsonlite::fromJSON(fileparams),
+             error = function(c) {
+               c$message <- paste0(c$message, " (in ", fileparams, ")")
+               stop(c)
+             }
+    )
+  } else {
+    message <- paste0("Parameter file '", fileparams, "' not found.")
+    stop(message)
+  }
+}
+
+select_factors <- function (dt){
+  names(Filter(function(x)
+    is.factor(x) ||
+      is.logical(x) ||
+      is.character(x),
+    dt))
+}
+
+select_numeric <- function (dt){
+  names(Filter(function(x)
+    is.integer(x) ||
+      is.numeric(x) ||
+      is.double(x),
+    dt))
 }
 
 

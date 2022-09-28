@@ -1,17 +1,16 @@
+#' Title
+#' Creates a histogram
+#'
+#' @param parametersfile json structure containing information to create a histogram
+#'
+#' @return a ggplot object
+#' @export
+#'
+# #' @examples
 histogram <- function(parametersfile){
 
-  if (file.exists(parametersfile)){
-    tryCatch(lp <-  jsonlite::fromJSON(parametersfile),
-             error = function(c) {
-               c$message <- paste0(c$message, " (in ", parametersfile, ")")
-               stop(c)
-             }
-    )
-  } else {
-    message <- paste0("Parameter file '", parametersfile, "' not found.")
-    stop(message)
-  }
-
+  # reading list of parameters lp
+  lp <- validate_json_file(parametersfile)
   res <- validate_parameters(parametersfile,pschema="histogram_schema.json")
 
   if (res==FALSE) {
@@ -19,62 +18,101 @@ histogram <- function(parametersfile){
   }
 
   print("Print creating the histogram ...")
-  colorear <- lp$colour
 
-  if (colorear == ""){
-    colorear = NULL
+  print(lp$variables)
+
+  if (length(lp$variables) < 1) {
+    cols <- read_data(lp$filename,NULL)
+  } else {
+    cols <- read_data(lp$filename,lp$variables)
   }
 
-  cgroup <- lp$group
-  print(cgroup)
+  str(cols)
+  list_factors <- select_factors(cols)
+  print(class(list_factors))
 
-  histcols <- lp$col_id
-  histcols <- c(histcols,cgroup)
+  list_numeric <- select_numeric(cols)
+  print(list_numeric)
 
-  print(histcols)
+  # colorear <- lp$colour
+  #
+  # if (colorear == ""){
+  #   colorear = NULL
+  # }
 
-  cols <- read_data(lp$filename,histcols)
-
-  if (! lp$col_id %in% colnames(cols) ) {
+  if (! lp$y_variable %in% colnames(cols) ) {
     stop(paste("'col_id' must be a column in",lp$filename))
   }
 
-  if (! lp$group %in% colnames(cols) ) {
-    stop(paste("'group' must be a column in",lp$filename))
-  }
+  p <- paste(
+    "ggplot2::ggplot(cols, ggplot2::aes(","x = lp$y_variable, ",
+    if (lp$colour %in% list_factors) {
+      "color = lp$colour, fill = lp$colour)) + "
+    } else {
+      ")) + "
+    },
+    if (lp$colour %in% grDevices::colors()) {
+      paste("ggplot2::geom_histogram(color='lp$colour', fill='lp$colour', ",
+            "binwidth = lp$binwidth)", sep = "")
+    } else {
+      paste("ggplot2::geom_histogram(position = 'identity', alpha = lp$alpha, ",
+          "binwidth = lp$binwidth)",  sep = "")
+    },
+    " + ggplot2::theme_bw() + ",
+    "ggplot2::labs(title = 'lp$title', caption = 'lp$caption') + ",
+    "ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))",
+    sep =""
+    )
 
-  print(str(cols))
-
-  p <- ggplot2::ggplot(data = cols, ggplot2::aes_string(x = lp$col_id,
-                                                        fill=cgroup
-                                                        )) +
-    ggplot2::geom_histogram(color=colorear,alpha=lp$alpha) + ggplot2::theme_bw()
-  p <- p + ggplot2::labs(title = lp$title,caption = lp$caption)
-  p <- p + ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
-  now <- Sys.time()
-  if (lp$save==TRUE){
-    outputfile <- file.path(paste0(lp$filename,"-hist-",format(now, "%Y%m%d_%H%M%S"),".",lp$device))
-    ggplot2::ggsave(outputfile,plot=p, device= lp$device,  width = lp$width,
-                    height =lp$height, units = "cm")
-    print(paste("Histogram saved in: ",outputfile))
-  }
-  if (lp$interactive == TRUE) {
-    print("Creating interactive plot ...")
-    outputfile <- file.path(paste0(lp$filename,"-hist-",format(now, "%Y%m%d_%H%M%S"),".html"))
-    ip <- plotly::ggplotly(p)
-    htmlwidgets::saveWidget(ip, outputfile)
-  }
+  p <- stringr::str_replace_all(
+    p,
+    c("lp\\$y_variable" = lp$y_variable,
+      "lp\\$colour" = as.character(lp$colour),
+      "lp\\$bin_width" = as.character(lp$bin_width),
+      "lp\\$alpha" = as.character(lp$alpha),
+      "lp\\$title" = as.character(lp$title),
+      "lp\\$caption" = as.character(lp$caption)
+      )
+    )
+  p <- stringr::str_replace_all(p, ",\n    \\)", "\n  \\)")
+  print(p)
+  p <- eval(parse(text = p))
   p
+  # p <- ggplot2::ggplot(data = cols, ggplot2::aes_string(x = lp$col_id,
+  #                                                       fill=cgroup
+  #                                                       )) +
+  #   ggplot2::geom_histogram(color=colorear,alpha=lp$alpha) + ggplot2::theme_bw()
+  # p <- p + ggplot2::labs(title = lp$title,caption = lp$caption)
+  # p <- p + ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
+
+
+  # now <- Sys.time()
+  # if (lp$save==TRUE){
+  #   outputfile <- file.path(paste0(lp$filename,"-hist-",format(now, "%Y%m%d_%H%M%S"),".",lp$device))
+  #   ggplot2::ggsave(outputfile,plot=p, device= lp$device,  width = lp$width,
+  #                   height =lp$height, units = "cm")
+  #   print(paste("Histogram saved in: ",outputfile))
+  # }
+  # if (lp$interactive == TRUE) {
+  #   print("Creating interactive plot ...")
+  #   outputfile <- file.path(paste0(lp$filename,"-hist-",format(now, "%Y%m%d_%H%M%S"),".html"))
+  #   ip <- plotly::ggplotly(p)
+  #   htmlwidgets::saveWidget(ip, outputfile)
+  # }
 }
 
 
 hist_params <- function(){
   json_params <- '{
     "filename": "<path/filename>",
-    "col_id": "<varname>",
+    "variables": [],
+    "y-variable": "<varname>",
     "group": "<vargroup>",
     "colour": "black",
     "fill": "lightblue",
+    "facet_row": "no-groups",
+    "facet_column": "no-groups",
+    "bin_width": -1,
     "alpha": 0.5,
 	  "height": 10,
 	  "width": 15,

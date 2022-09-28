@@ -7,9 +7,19 @@
       "type": "string",
       "required": true
     },
-    "col_id": {
-      "title": "Column name",
-      "description": "Columns/variable name to create the histogram",
+    "variables": {
+      "title": "Column/Variable names",
+      "description": "Columns to be loaded from the datafile",
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true,
+      "default":[]
+    },
+    "y_variable": {
+      "title": "Y variable",
+      "description": "Variable for vertical axis",
       "type": "string",
       "required": true
     },
@@ -28,8 +38,26 @@
       "description": "Color to fill the histogram bars",
       "type": "string"
     },
+    "facet_row":{
+      "title": "Facet row",
+      "description": "Variable to create facets in horizontal direction",
+      "type": "string",
+      "default": "None"
+    },
+    "facet_column":{
+      "title": "Facet row",
+      "description": "Variable to create facets in vertical direction",
+      "type": "string",
+      "default": "None"
+    },
+    "bin_width":{
+      "title": "Bin width",
+      "description": "Numeric integer representing bin size",
+      "type": "number",
+      "default" : 1,
+    },
     "alpha": {
-      "title": "Alpha",
+      "title": "Opacity",
       "description": "Transparency level",
 	    "type": "number",
 	    "default":0.5,
@@ -37,6 +65,32 @@
 	    "maximum":1,
 	    "required": true
     },
+	  "height":{
+	    "title": "Height",
+	    "description": "Height in centimeters",
+	    "type": "number",
+	    "default":10,
+	    "minimum":1,
+	    "maximum":2000,
+	    "required": true
+	  },
+	  "width":{
+	    "title": "Width",
+	    "description": "Width in centimeters",
+	    "type": "number",
+	    "default":15,
+	    "minimum":1,
+	    "maximum":2000,
+	    "required": true
+	  },
+	  "title":{
+	    "title": "Title",
+	    "type": "string"
+	  },
+	  "caption":{
+	    "title": "Caption",
+	    "type": "string"
+	  },
     "save": {
 	    "title": "Save file?",
 	    "type": "boolean",

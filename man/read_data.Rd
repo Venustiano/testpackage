@@ -3,14 +3,14 @@
 \name{read_data}
 \alias{read_data}
 \title{Title
-Reads columns from a data table}
+Reads columns from a file in table format}
 \usage{
 read_data(filename, select_columns)
 }
 \arguments{
-\item{filename}{a string filename including the relative}
+\item{filename}{a string data file name including the relative path}
 
-\item{select_columns}{a vector including the column names from the data file}
+\item{select_columns}{a vector including the column names to be read from the data file}
 }
 \value{
 if succeds, this function returns a data table
