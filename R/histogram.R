@@ -28,17 +28,12 @@ histogram <- function(parametersfile){
   cgroup <- lp$group
   print(cgroup)
 
-  histcol <- lp$col_id
-  histcol <- c(histcol,cgroup)
+  histcols <- lp$col_id
+  histcols <- c(histcols,cgroup)
 
-  print(histcol)
+  print(histcols)
 
-  tryCatch(cols <- data.table::fread(lp$filename,select = histcol),
-           error = function(c) {
-             c$message <- paste0(c$message, " (in ", parametersfile, ")")
-             stop(c)
-           }
-  )
+  cols <- read_data(lp$filename,histcols)
 
   if (! lp$col_id %in% colnames(cols) ) {
     stop(paste("'col_id' must be a column in",lp$filename))
