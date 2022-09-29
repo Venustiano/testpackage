@@ -1,19 +1,16 @@
 
-#' Projection based on principal component analysis
+#' Title
 #'
+#' @param parametersfile list of parameters in a json file
+#'
+#' @return a ggplot object
+#' @export
+#'
+# #' @examples
 pcaproj <- function(parametersfile){
-
-  if (file.exists(parametersfile)){
-    tryCatch(lp <-  jsonlite::fromJSON(parametersfile),
-             error = function(c) {
-               c$message <- paste0(c$message, " (in ", parametersfile, ")")
-               stop(c)
-             }
-    )
-  } else {
-      message <- paste0("Parameter file '", parametersfile, "' not found.")
-      stop(message)
-  }
+  # Projection based on principal component analysis
+  # reading list of parameters lp
+  lp <- validate_json_file(parametersfile)
 
   res <- validate_parameters(parametersfile)
 
@@ -32,12 +29,11 @@ pcaproj <- function(parametersfile){
   pbiplot <- lp$biplot
   pcacols <- lp$col_ids
 
-  tryCatch(cols <- data.table::fread(lp$filename,select = pcacols),
-           error = function(c) {
-             c$message <- paste0(c$message, " (in ", parametersfile, ")")
-             stop(c)
-           }
-  )
+  if (length(lp$col_ids) < 1)
+    colvars <- NULL
+  else
+    colvars <- lp$col_ids
+  cols <- read_data(lp$filename,colvars)
 
   print(str(cols))
   pcacols <- pcacols[! pcacols %in% append(c(),colorear)]
@@ -45,7 +41,7 @@ pcaproj <- function(parametersfile){
   print(pcacols)
   # PCA
   tpca <- stats::prcomp(Filter(is.numeric,dplyr::select(cols,pcacols)),scale=pscale)
-  # TODO: investigate namespace for print(summary(tpca))
+
   print(summary(tpca))
   # load `.__T__[:base` to fix `! Objects of type prcomp not supported by autoplot.`
   ggfortify::`.__T__[:base`
@@ -71,6 +67,7 @@ pcaproj <- function(parametersfile){
     htmlwidgets::saveWidget(ip, outputfile)
     print(paste("Interactive pca plot in: ",outputfile))
   }
+  p
 }
 
 pca_params <- function(){
@@ -92,5 +89,3 @@ pca_params <- function(){
   djson <- jsonlite::prettify(json_params)
   djson
 }
-
-

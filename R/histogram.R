@@ -34,14 +34,8 @@ histogram <- function(parametersfile){
   list_numeric <- select_numeric(cols)
   print(list_numeric)
 
-  # colorear <- lp$colour
-  #
-  # if (colorear == ""){
-  #   colorear = NULL
-  # }
-
   if (! lp$y_variable %in% colnames(cols) ) {
-    stop(paste("'col_id' must be a column in",lp$filename))
+    stop(paste("'",lp$y_variable,"' must be a column in",lp$filename))
   }
 
   p <- paste(

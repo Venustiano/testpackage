@@ -2,10 +2,16 @@
 % Please edit documentation in R/pcaprojection.R
 \name{pcaproj}
 \alias{pcaproj}
-\title{Projection based on principal component analysis}
+\title{Title}
 \usage{
 pcaproj(parametersfile)
 }
+\arguments{
+\item{parametersfile}{list of parameters in a json file}
+}
+\value{
+a ggplot object
+}
 \description{
-Projection based on principal component analysis
+Title
 }
