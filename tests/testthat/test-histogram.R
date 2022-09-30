@@ -4,6 +4,9 @@ test_that("Validating columns", {
   expect_error(histogram("params/hist_incorrect-col_id.json"),
                "' length ' must be a column in data/iris.csv")
 
+  p <- histogram("params/hist_buildingpermits.json")
+  expect_s3_class(p,"ggplot")
+
   # expect_error(histogram("hist_incorrect-group.json"),
   #              "'col_id' must be a column in iris.csv")
 

@@ -71,7 +71,7 @@ histogram <- function(parametersfile){
   p <- stringr::str_replace_all(p, ",\n    \\)", "\n  \\)")
   print(p)
   p <- eval(parse(text = p))
-  p
+  print(p)
   # p <- ggplot2::ggplot(data = cols, ggplot2::aes_string(x = lp$col_id,
   #                                                       fill=cgroup
   #                                                       )) +

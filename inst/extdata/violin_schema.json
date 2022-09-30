@@ -120,6 +120,14 @@
 	    "title": "Caption",
 	    "type": "string"
 	  },
+	  "rotxlabs": {
+	    "title": "Rotate x labels",
+	    "type": "number",
+      "default": 0,
+      "minimum": -360,
+      "exclusiveMinimum": true,
+      "maximum": 360
+	  },
     "save": {
 	    "title": "Save file?",
 	    "type": "boolean",

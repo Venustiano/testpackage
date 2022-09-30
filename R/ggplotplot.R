@@ -56,6 +56,26 @@ violin <- function(lparams) {
    "ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))",
     sep =""
     )
+
+  if (!is.null(lparams$facet_row) && lparams$facet_row %in% fnames)
+    facets <- paste(lparams$facet_row,"~")
+  else
+    facets <- ". ~"
+
+  if (!is.null(lparams$facet_colum) && lparams$facet_colum %in% fnames)
+    facets <- paste(facets,lparams$facet_column)
+  else
+    facets <- paste(facets,".")
+
+  print(facets)
+  if (facets != ". ~ .")
+    p <- paste(p, "+ ggplot2::facet_grid(", facets, ")")
+
+  if (!is.null(lparams$rotxlabs))
+    p <- paste(p,
+      " + ggplot2::theme(\n    ",
+        "axis.text.x = ggplot2::element_text(angle = lparams$rotxlabs, hjust = 1))\n")
+
   p <- stringr::str_replace_all(
     p,
     c("lparams\\$y_variable" = lparams$y_variable,
@@ -75,5 +95,5 @@ violin <- function(lparams) {
   p <- stringr::str_replace_all(p, ",\n    \\)", "\n  \\)")
   print(p)
   p <- eval(parse(text = p))
-  p
+  print(p)
 }

@@ -5,11 +5,13 @@
 	"x_variable": "species",
 	"colour" : "speciesX",
 	"fill" : "species",
+	"facet_column": "species",
 	"alpha": 0.5,
 	"height": 10,
 	"width": 15,
 	"title" : "Iris",
 	"caption": "This is my caption",
+	"rotxlabs" : 0,
 	"save": false,
 	"interactive": false
 }
