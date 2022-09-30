@@ -24,15 +24,20 @@ validate_parameters <- function(params,pschema="pca_projection_schema.json"){
 #'
 # #' @examples
 read_data <- function(filename,select_columns){
+  # Check for empty list
+  if (length(select_columns)<1)
+    select_columns = NULL
+  print(select_columns)
   tryCatch(cols <- data.table::fread(filename,select = select_columns),
            error = function(c) {
-             c$message <- paste0(c$message, " (in ", parametersfile, ")")
+             c$message <- paste0(c$message, " (in ", filename, ")")
              stop(c)
-             },
-           warning = function(c) {
-             c
              }
+           # ,warning = function(c) {
+           #   c
+           #   }
   )
+  # print(cols)
 }
 
 validate_json_file <- function(fileparams) {
