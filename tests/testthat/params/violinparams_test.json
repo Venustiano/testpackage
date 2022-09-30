@@ -1,0 +1,15 @@
+{
+	"filename": "data/iris.csv",
+	"variables": ["sepal_length","species"],
+	"y_variable": "sepal_length",
+	"x_variable": "species",
+	"colour" : "speciesX",
+	"fill" : "species",
+	"alpha": 0.5,
+	"height": 10,
+	"width": 15,
+	"title" : "Iris",
+	"caption": "This is my caption",
+	"save": false,
+	"interactive": false
+}
