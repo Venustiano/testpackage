@@ -39,7 +39,7 @@
       "description": "Dodge or identity position",
       "type": "string",
       "enum": [ "identity", "dodge", "dodge2"],
-	    "default": "pdf"
+	    "default": "dodge"
     },
     "group": {
       "title": "Group",

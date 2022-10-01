@@ -1,12 +1,76 @@
 list_params <- function(fileparams,jsonschema){
   # reading and validating list of parameters lp
   lp <- validate_json_file(fileparams)
-  # validating lp against schema
+  # validating lp against the jsonschema
   res <- validate_parameters(fileparams,pschema=jsonschema)
   return(lp)
 }
 
-violin <- function(lparams) {
+#' Title
+#'
+#' Given a data file an appropriate variables, creates violin plot(s)
+#'
+#' @param fileparams a json file containing metadata to create a violin plot
+#'
+#' "filename": <string>
+#'
+#' "variables": <array of strings representing column names>
+#'
+#' "y_variable": <string variable to be plotted on the vertical direction>
+#'
+#' "x_variable: <string, preferable a categorical variable>
+#'
+#' "factorx": <boolean, whether to convert x_variable into a categorical variable>
+#'
+#' "position" : <enum, ["dodge", "identity", "dodge2"]>
+#'
+#' "group": <string, column variable>
+#'
+#' "colour": <string, a column variable or a predefined color in colors()>
+#'
+#' "fill": <string, column variable>
+#'
+#' "linetype": <enum, ["blank", "solid", "dashed", "dotted", "dotdash", "longdash", "twodash"]>
+#'
+#' "size": <number, line size>
+#'
+#' "weight": <number, but no used yet>
+#'
+#' "facet_row": <string, variable name>
+#'
+#' "facet_column": <string, variable name>
+#'
+#' "alpha": <number, between 0 and 1>
+#'
+#' "height": <number, in cm of the output visualization file>
+#'
+#' "width": <number, in cm of the output visualization file>
+#'
+#' "title": <string, title of the plot>
+#'
+#' "caption": <string, caption of the plot>
+#'
+#' "rotxlabs": <number, rotate x labels in grades>
+#'
+#' "save": <boolean, save the file?
+#'
+#' "device": <enum, ["eps", "ps", "tex", "pdf", "jpeg", "tiff", "png", "bmp", "svg"]>
+#'
+#' "interactive": <boolean, save Interactive version>
+#'
+#' Further information can be found in \href{https://ggplot2.tidyverse.org/reference/geom_violin.html}{geom_violin} documentation.
+
+#' @return a ggplot object and if indicated in 'fileparams' stores the plot in a file (s)
+#' @export
+#'
+# #' @examples
+
+violin <- function(fileparams) {
+
+  # reading and validating list of parameters lp
+  lparams <- validate_json_file(fileparams)
+  # validating lp against the violin json schema
+  res <- validate_parameters(fileparams,pschema="violin_schema.json")
 
   dt <- read_data(lparams$filename,lparams$variables)
   # factor variables
