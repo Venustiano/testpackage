@@ -65,11 +65,11 @@ list_params <- function(fileparams,jsonschema){
 #'
 # #' @examples
 
-violin <- function(fileparams) {
+cm_ggviolin <- function(fileparams) {
 
   # reading and validating list of parameters lp
   lparams <- validate_json_file(fileparams)
-  # validating lp against the violin json schema
+  # validating lparams against the violin json schema
   res <- validate_parameters(fileparams,pschema="violin_schema.json")
 
   dt <- read_data(lparams$filename,lparams$variables)

@@ -1,10 +1,10 @@
 test_that("use", {
   lp <- list_params("params/violinparams_test.json","violin_schema.json")
   expect_type(lp,"list")
-  p <- violin("params/violinparams_test.json")
+  p <- cm_ggviolin("params/violinparams_test.json")
   expect_s3_class(p,"ggplot")
   lp <- list_params("params/BPermits_parameters.json","violin_schema.json")
   # expect_type(lp,"list")
-  p <- violin("params/BPermits_parameters.json")
+  p <- cm_ggviolin("params/BPermits_parameters.json")
   expect_s3_class(p,"ggplot")
 })
