@@ -8,7 +8,43 @@ Creates a histogram}
 histogram(parametersfile)
 }
 \arguments{
-\item{parametersfile}{json structure containing information to create a histogram}
+\item{parametersfile}{a json file containing metadata to create a violin plot
+
+"filename": <string>
+
+"variables": <array of strings representing column names>
+
+"y_variable": <string variable to be plotted on the vertical direction>
+
+"group": <string, column variable>
+
+"colour": <string, a column variable or a predefined color in colors()>
+
+"fill": <string, column variable>
+
+"facet_row": <string, variable name>
+
+"facet_column": <string, variable name>
+
+"alpha": <number, between 0 and 1>
+
+"height": <number, in cm of the output visualization file>
+
+"width": <number, in cm of the output visualization file>
+
+"title": <string, title of the plot>
+
+"caption": <string, caption of the plot>
+
+"rotxlabs": <number, rotate x labels in grades>
+
+"save": <boolean, save the file?
+
+"device": <enum, ["eps", "ps", "tex", "pdf", "jpeg", "tiff", "png", "bmp", "svg"]>
+
+"interactive": <boolean, save Interactive version>
+
+Further information can be found in [geom_histogram](https://ggplot2.tidyverse.org/reference/geom_histogram.html)}
 }
 \value{
 a ggplot object

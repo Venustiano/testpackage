@@ -2,7 +2,7 @@
 % Please edit documentation in R/ggplotplot.R
 \name{cm_ggviolin}
 \alias{cm_ggviolin}
-\title{Title}
+\title{cm_ggviolin}
 \usage{
 cm_ggviolin(fileparams)
 }
@@ -61,5 +61,5 @@ Further information can be found in \href{https://ggplot2.tidyverse.org/referenc
 a ggplot object and if indicated in 'fileparams' stores the plot in a file (s)
 }
 \description{
-Given a data file an appropriate variables, creates violin plot(s)
+Creates violin plot(s) using ggplot
 }

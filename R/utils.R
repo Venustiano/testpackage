@@ -70,7 +70,23 @@ select_numeric <- function (dt){
     dt))
 }
 
+add_facets <- function(splot,lpars,factornames){
 
+  if (!is.null(lpars$facet_row) && lpars$facet_row %in% factornames)
+    facets <- paste(lpars$facet_row,"~")
+  else
+    facets <- ". ~"
+
+  if (!is.null(lpars$facet_colum) && lpars$facet_colum %in% factornames)
+    facets <- paste(facets,lpars$facet_column)
+  else
+    facets <- paste(facets,".")
+
+  print(facets)
+  if (facets != ". ~ .")
+    splot <- paste(splot, "+ ggplot2::facet_grid(", facets, ")")
+  splot
+}
 # TODO: create functions to display the required parameters in json structure
 # TODO: write a function to extract the json structure from the schema
 
