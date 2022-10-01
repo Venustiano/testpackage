@@ -7,11 +7,24 @@
 pcaproj(parametersfile)
 }
 \arguments{
-\item{parametersfile}{list of parameters in a json file}
+\item{parametersfile}{list of parameters in a json file
+
+"filename": <string, Csv file including more than 3 columns>
+"col_ids": <array, numeric columns for applying PCA>
+"colour": <string, categorical variable to colour the projected points>
+"scale": <boolean, scale variables?>
+"biplot": <boolean, Display biplot (loadings)>
+"height": <number, in cm of the output visualization file>
+"width": <number, in cm of the output visualization file>
+"title": <string, title of the plot>
+"caption": <string, caption of the plot>
+"save": <boolean, save the file?>
+"device": <enum, ["eps", "ps", "tex", "pdf", "jpeg", "tiff", "png", "bmp", "svg"]>
+"interactive": <boolean, save Interactive version>}
 }
 \value{
 a ggplot object
 }
 \description{
-Title
+PCA projection
 }

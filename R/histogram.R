@@ -1,7 +1,8 @@
 #' Title
+#'
 #' Creates a histogram
 #'
-#' @param parametersfile a json file containing metadata to create a violin plot
+#' @param parametersfile a json file containing metadata to create a histogram
 #'
 #' "filename": <string>
 #'
@@ -31,7 +32,7 @@
 #'
 #' "rotxlabs": <number, rotate x labels in grades>
 #'
-#' "save": <boolean, save the file?
+#' "save": <boolean, save the file?>
 #'
 #' "device": <enum, ["eps", "ps", "tex", "pdf", "jpeg", "tiff", "png", "bmp", "svg"]>
 #'
@@ -39,7 +40,7 @@
 #'
 #' Further information can be found in [geom_histogram](https://ggplot2.tidyverse.org/reference/geom_histogram.html)
 #'
-#' @return a ggplot object
+#' @return a ggplot object and if indicated in 'parametersfile' stores the plot in a file (s)
 #' @export
 #'
 # #' @examples
@@ -125,6 +126,7 @@ histogram <- function(parametersfile){
     htmlwidgets::saveWidget(ip, outputfile)
     print(paste("Interactive plot created:",outputfile))
   }
+  p
 }
 
 

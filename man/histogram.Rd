@@ -2,13 +2,12 @@
 % Please edit documentation in R/histogram.R
 \name{histogram}
 \alias{histogram}
-\title{Title
-Creates a histogram}
+\title{Title}
 \usage{
 histogram(parametersfile)
 }
 \arguments{
-\item{parametersfile}{a json file containing metadata to create a violin plot
+\item{parametersfile}{a json file containing metadata to create a histogram
 
 "filename": <string>
 
@@ -38,7 +37,7 @@ histogram(parametersfile)
 
 "rotxlabs": <number, rotate x labels in grades>
 
-"save": <boolean, save the file?
+"save": <boolean, save the file?>
 
 "device": <enum, ["eps", "ps", "tex", "pdf", "jpeg", "tiff", "png", "bmp", "svg"]>
 
@@ -47,9 +46,8 @@ histogram(parametersfile)
 Further information can be found in [geom_histogram](https://ggplot2.tidyverse.org/reference/geom_histogram.html)}
 }
 \value{
-a ggplot object
+a ggplot object and if indicated in 'parametersfile' stores the plot in a file (s)
 }
 \description{
-Title
 Creates a histogram
 }
