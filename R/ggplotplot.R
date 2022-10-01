@@ -6,9 +6,9 @@ list_params <- function(fileparams,jsonschema){
   return(lp)
 }
 
-#' Title
+#' cm_ggviolin
 #'
-#' Given a data file an appropriate variables, creates violin plot(s)
+#' Creates violin plot(s) using ggplot
 #'
 #' @param fileparams a json file containing metadata to create a violin plot
 #'
@@ -59,7 +59,7 @@ list_params <- function(fileparams,jsonschema){
 #' "interactive": <boolean, save Interactive version>
 #'
 #' Further information can be found in \href{https://ggplot2.tidyverse.org/reference/geom_violin.html}{geom_violin} documentation.
-
+#'
 #' @return a ggplot object and if indicated in 'fileparams' stores the plot in a file (s)
 #' @export
 #'

@@ -1,7 +1,43 @@
 #' Title
 #' Creates a histogram
 #'
-#' @param parametersfile json structure containing information to create a histogram
+#' @param parametersfile a json file containing metadata to create a violin plot
+#'
+#' "filename": <string>
+#'
+#' "variables": <array of strings representing column names>
+#'
+#' "y_variable": <string variable to be plotted on the vertical direction>
+#'
+#' "group": <string, column variable>
+#'
+#' "colour": <string, a column variable or a predefined color in colors()>
+#'
+#' "fill": <string, column variable>
+#'
+#' "facet_row": <string, variable name>
+#'
+#' "facet_column": <string, variable name>
+#'
+#' "alpha": <number, between 0 and 1>
+#'
+#' "height": <number, in cm of the output visualization file>
+#'
+#' "width": <number, in cm of the output visualization file>
+#'
+#' "title": <string, title of the plot>
+#'
+#' "caption": <string, caption of the plot>
+#'
+#' "rotxlabs": <number, rotate x labels in grades>
+#'
+#' "save": <boolean, save the file?
+#'
+#' "device": <enum, ["eps", "ps", "tex", "pdf", "jpeg", "tiff", "png", "bmp", "svg"]>
+#'
+#' "interactive": <boolean, save Interactive version>
+#'
+#' Further information can be found in [geom_histogram](https://ggplot2.tidyverse.org/reference/geom_histogram.html)
 #'
 #' @return a ggplot object
 #' @export
@@ -21,11 +57,7 @@ histogram <- function(parametersfile){
 
   print(lp$variables)
 
-  if (length(lp$variables) < 1) {
-    cols <- read_data(lp$filename,NULL)
-  } else {
-    cols <- read_data(lp$filename,lp$variables)
-  }
+  cols <- read_data(lp$filename,lp$variables)
 
   str(cols)
   list_factors <- select_factors(cols)
@@ -58,6 +90,13 @@ histogram <- function(parametersfile){
     sep =""
     )
 
+  p <- add_facets(p,lp,list_factors)
+
+  if (!is.null(lp$rotxlabs))
+    p <- paste(p,
+               " + ggplot2::theme(\n    ",
+               "axis.text.x = ggplot2::element_text(angle = lp$rotxlabs, hjust = 1))\n")
+
   p <- stringr::str_replace_all(
     p,
     c("lp\\$y_variable" = lp$y_variable,
@@ -71,28 +110,21 @@ histogram <- function(parametersfile){
   p <- stringr::str_replace_all(p, ",\n    \\)", "\n  \\)")
   print(p)
   p <- eval(parse(text = p))
-  print(p)
-  # p <- ggplot2::ggplot(data = cols, ggplot2::aes_string(x = lp$col_id,
-  #                                                       fill=cgroup
-  #                                                       )) +
-  #   ggplot2::geom_histogram(color=colorear,alpha=lp$alpha) + ggplot2::theme_bw()
-  # p <- p + ggplot2::labs(title = lp$title,caption = lp$caption)
-  # p <- p + ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))
 
-
-  # now <- Sys.time()
-  # if (lp$save==TRUE){
-  #   outputfile <- file.path(paste0(lp$filename,"-hist-",format(now, "%Y%m%d_%H%M%S"),".",lp$device))
-  #   ggplot2::ggsave(outputfile,plot=p, device= lp$device,  width = lp$width,
-  #                   height =lp$height, units = "cm")
-  #   print(paste("Histogram saved in: ",outputfile))
-  # }
-  # if (lp$interactive == TRUE) {
-  #   print("Creating interactive plot ...")
-  #   outputfile <- file.path(paste0(lp$filename,"-hist-",format(now, "%Y%m%d_%H%M%S"),".html"))
-  #   ip <- plotly::ggplotly(p)
-  #   htmlwidgets::saveWidget(ip, outputfile)
-  # }
+  now <- Sys.time()
+  if (lp$save==TRUE){
+    outputfile <- file.path(paste0(lp$filename,"-hist-",format(now, "%Y%m%d_%H%M%S"),".",lp$device))
+    ggplot2::ggsave(outputfile,plot=p, device= lp$device,  width = lp$width,
+                    height =lp$height, units = "cm")
+    print(paste("Histogram saved in: ",outputfile))
+  }
+  if (lp$interactive == TRUE) {
+    print("Creating interactive plot ...")
+    outputfile <- file.path(paste0(lp$filename,"-hist-",format(now, "%Y%m%d_%H%M%S"),".html"))
+    ip <- plotly::ggplotly(p)
+    htmlwidgets::saveWidget(ip, outputfile)
+    print(paste("Interactive plot created:",outputfile))
+  }
 }
 
 
