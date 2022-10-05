@@ -13,7 +13,7 @@ cm_ggviolin(fileparams)
 
 "variables": <array, column names to be loaded>
 
-"y_variable": <string, variable to be plotted on the vertical direction>
+"y_variable": <string, required variable to be plotted on the vertical direction>
 
 "x_variable: <string, preferable a categorical variable>
 
