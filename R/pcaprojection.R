@@ -5,13 +5,13 @@
 #'
 #' @param parametersfile list of parameters in a json file
 #'
-#' "filename": <string, Csv file including more than 3 columns>
+#' "filename": <string, csv file including more than 3 columns>
 #'
 #' "col_ids": <array, numeric columns for applying PCA>
 #'
 #' "colour": <string, categorical variable to colour the projected points>
 #'
-#' "scale": <boolean, scale variables?>
+#' "scale": <boolean, whether to scale the selected variables>
 #'
 #' "biplot": <boolean, Display biplot (loadings)>
 #'

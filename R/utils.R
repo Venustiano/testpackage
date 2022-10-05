@@ -3,13 +3,8 @@
 #' @param lparams The list of parameters to be validated
 #' @export
 validate_parameters <- function(params,pschema="pca_projection_schema.json"){
-  jsonvalidate::json_validate(params,
-                              system.file("extdata",
-                                          pschema,
-                                          package = "pcaprojection"
-                                          ),
-                              verbose=TRUE,
-                              error=TRUE)
+  schemafile <- system.file("extdata", pschema, package = "pcaprojection")
+  jsonvalidate::json_validate(params,schemafile,verbose=TRUE,error=TRUE)
 }
 
 #' Title
@@ -72,13 +67,23 @@ select_numeric <- function (dt){
 
 add_facets <- function(splot,lpars,factornames){
 
-  if (!is.null(lpars$facet_row) && lpars$facet_row %in% factornames)
-    facets <- paste(lpars$facet_row,"~")
+  if (!is.null(lpars$facet_row))
+      if (lpars$facet_row %in% factornames)
+        facets <- paste(lpars$facet_row,"~")
+      else {
+        warning(paste(lpars$facet_row,"not in:",factornames))
+        facets <- ". ~"
+      }
   else
     facets <- ". ~"
 
-  if (!is.null(lpars$facet_colum) && lpars$facet_colum %in% factornames)
-    facets <- paste(facets,lpars$facet_column)
+  if (!is.null(lpars$facet_colum))
+      if (lpars$facet_colum %in% factornames)
+        facets <- paste(facets,lpars$facet_column)
+      else {
+        facets <- paste(facets,".")
+        warning(paste(lpars$facet_column,"not in: ",factornames))
+      }
   else
     facets <- paste(facets,".")
 
@@ -87,6 +92,7 @@ add_facets <- function(splot,lpars,factornames){
     splot <- paste(splot, "+ ggplot2::facet_grid(", facets, ")")
   splot
 }
+
 # TODO: create functions to display the required parameters in json structure
 # TODO: write a function to extract the json structure from the schema
 

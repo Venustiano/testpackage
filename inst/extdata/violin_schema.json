@@ -26,8 +26,7 @@
     "x_variable": {
       "title": "X variable",
       "description": "Variable for the horizontal axis",
-      "type": "string",
-      "required": true
+      "type": "string"
     },
     "factorx": {
       "title":"Convert to factor",
@@ -48,12 +47,12 @@
     },
     "colour": {
       "title": "Colour",
-      "description": "Line color of the histogram",
+      "description": "Line color",
       "type": "string"
     },
     "fill": {
       "title": "Fill",
-      "description": "Color to fill the histogram bars",
+      "description": "Color to fill the violin plots",
       "type": "string"
     },
     "linetype": {
@@ -91,27 +90,61 @@
 	    "type": "number",
 	    "default":0.5,
 	    "minimum":0,
-	    "maximum":1,
-	    "required": true
+	    "maximum":1
     },
-	  "height":{
-	    "title": "Height",
-	    "description": "Output height in centimeters",
-	    "type": "number",
-	    "default":10,
-	    "minimum":1,
-	    "maximum":2000,
-	    "required": true
-	  },
-	  "width":{
-	    "title": "Width",
-	    "description": "Output width in centimeters",
-	    "type": "number",
-	    "default":15,
-	    "minimum":1,
-	    "maximum":2000,
-	    "required": true
-	  },
+    "color_manual":{
+      "title": "Color manual",
+      "description": "Assign categorical colors manually",
+      "type": "object",
+      "properties" : {
+        "values" : {
+          "title": "Color values",
+          "description": "Hexadecimal colors",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "breaks": {
+          "title": "Breaks",
+          "description": "Variable categories to be colored",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "labels": {
+          "title": "Labels",
+          "description": "A character vector giving labels",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        }
+      }
+    },
+    "boxplot":{
+      "title": "Boxplot",
+      "description": "Add a boxplot",
+      "type": "object",
+      "properties": {
+	      "addboxplot": {
+	        "title": "Add boxplot",
+	        "type": "boolean",
+	        "default": false,
+	        "required": true
+	      },
+        "width":{
+          "title": "Width",
+          "description": "width of boxplot",
+          "type": "number",
+          "default":0.1
+        }
+      }
+    },
 	  "title":{
 	    "title": "Title",
 	    "type": "string"
@@ -129,22 +162,45 @@
       "maximum": 360
 	  },
     "save": {
-	    "title": "Save file?",
-	    "type": "boolean",
-	    "default": false,
-	    "required": true
-	  },
-	  "device": {
-	    "title": "Device",
-	    "type": "string",
-	    "enum": [ "eps", "ps", "tex", "pdf", "jpeg", "tiff", "png", "bmp", "svg"],
-	    "default": "pdf"
-	  },
+	    "title": "Save",
+	    "type": "object",
+	    "properties" : {
+	      "save": {
+	        "title": "Save file?",
+	        "type": "boolean",
+	        "default": false,
+	        "required": true
+	      },
+	      "width" : {
+	        "title": "Width",
+	        "description": "Output width in centimeters",
+	        "type": "number",
+	        "default":15,
+	        "minimum":1,
+	        "maximum":2000,
+	        "required": true
+	      },
+	      "height":{
+	        "title": "Height",
+	        "description": "Output height in centimeters",
+	        "type": "number",
+	        "default":10,
+	        "minimum":1,
+	        "maximum":2000,
+	        "required": true
+	      },
+    	  "device": {
+	        "title": "Device",
+	        "type": "string",
+	        "enum": [ "eps", "ps", "tex", "pdf", "jpeg", "tiff", "png", "bmp", "svg"],
+	        "default": "pdf"
+	      }
+	    }
+    },
     "interactive": {
-	    "title": "Interactive version",
+	    "title": "Save interactive version",
 	    "type": "boolean",
-	    "default": false,
-	    "required": true
+	    "default": false
 	  }
   }
 }
