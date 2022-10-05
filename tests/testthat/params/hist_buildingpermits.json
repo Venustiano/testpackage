@@ -15,5 +15,5 @@
 	  "caption":"Caption",
     "save": false,
     "device":"pdf",
-    "interactive":true
+    "interactive":false
 }

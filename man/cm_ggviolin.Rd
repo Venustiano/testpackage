@@ -9,11 +9,11 @@ cm_ggviolin(fileparams)
 \arguments{
 \item{fileparams}{a json file containing metadata to create a violin plot
 
-"filename": <string>
+"filename": <string, required>
 
-"variables": <array of strings representing column names>
+"variables": <array, column names to be loaded>
 
-"y_variable": <string variable to be plotted on the vertical direction>
+"y_variable": <string, variable to be plotted on the vertical direction>
 
 "x_variable: <string, preferable a categorical variable>
 
@@ -39,9 +39,19 @@ cm_ggviolin(fileparams)
 
 "alpha": <number, between 0 and 1>
 
-"height": <number, in cm of the output visualization file>
+"color_manual": <object, composed of 'values', 'breaks' and 'labels'. See ggplot scale_color_manual documentation.
 
-"width": <number, in cm of the output visualization file>
+    "values": <array, color values>
+
+    "breaks": <array, string of breaks>
+
+    "labels": <array, labels(must be same length as breaks)>
+
+"boxplot": <object, composed of 'addboxplot' and 'width'>
+
+   "addboxplot: <boolean, add box plot>
+
+   "width": <number, width of the boxplot>
 
 "title": <string, title of the plot>
 
@@ -49,7 +59,13 @@ cm_ggviolin(fileparams)
 
 "rotxlabs": <number, rotate x labels in grades>
 
+"save": <object, composed of 'save', 'height', 'width' and 'device'>
+
 "save": <boolean, save the file?
+
+"height": <number, in cm of the output visualization file>
+
+"width": <number, in cm of the output visualization file>
 
 "device": <enum, ["eps", "ps", "tex", "pdf", "jpeg", "tiff", "png", "bmp", "svg"]>
 

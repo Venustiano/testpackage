@@ -3,15 +3,26 @@
 	"variables": ["sepal_length","species"],
 	"y_variable": "sepal_length",
 	"x_variable": "species",
-	"colour" : "speciesX",
-	"fill" : "species",
-	"facet_column": "species",
+	"colour": "black",
+	"fill": "species",
+	"facet_row": "speciesx",
 	"alpha": 0.5,
-	"height": 10,
-	"width": 15,
-	"title" : "Iris",
+	"color_manual": {
+	  "values": ["#8dd3c7","#ffffb3","#bebada"],
+	  "breaks": ["versicolor","virginica","setosa"]
+	},
+	"boxplot":{
+	  "addboxplot": false,
+	  "width": 0.1
+	},
+	"title": "Iris plot",
 	"caption": "This is my caption",
-	"rotxlabs" : 0,
-	"save": false,
+	"rotxlabs" : 45,
+  "save":{
+    "save": false,
+    "width": 15,
+    "height": 10,
+    "device": "pdf"
+  },
 	"interactive": false
 }
