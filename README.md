@@ -4,11 +4,11 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-This package is still development and includes several data
+This package is still in development and includes several data
 visualization techniques. Currently, the most complete function is to
 create `violin` plots. However, other techniques are being implemented
 such as `histograms` and `projections`. The later technique is
-generated as a result of applying Principal component analysis.
+generated as a result of applying Principal Component Analysis.
 
 ## Containers
 
@@ -42,8 +42,10 @@ and `iris.csv` are in the current working directory, running the command
 docker run --rm -v "$PWD":/app/data venustiano/cds:rvispack-0.1.0 violin violin_parameters_iris.json
 ```
 
-will produce a violing plot. To get a list of all possible `key-value`
-pairs, use the name of the function and `help` as follows:
+will produce a violin plot. 
+
+To get a list of all possible `key-value` pairs, use the name of the
+function and `help` as follows:
 
 
 ```bash
