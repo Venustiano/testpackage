@@ -42,14 +42,22 @@ and `iris.csv` are in the current working director, running the command
 docker run --rm -v "$PWD":/app/data venustiano/cds:rvispack-0.1.0 violin violin_parameters_iris.json
 ```
 
-will produce a violing plot.
+will produce a violing plot. To get a list of all possible `key-value`
+pairs, use the name of the functio and `help` as follows:
+
+
+```bash
+docker run --rm venustiano/cds:rvispack-0.1.0 <function_name> help
+```
+
+Replace the text between the angle brackets by `histogram`, `pca` or `violin`.
 
 ### Results
 
 The results of running the visualization functions can be specified as
-`key-value` pair in the json file as a static file or as an
-interactive html visualization using plotly. If not `key-value` pair
-is specified, an `Rplot.pdf` will be saved in the current working directory.
+`key-value` pairs in the json file as a static file or as an
+interactive html visualization. If not `key-value` pair is specified,
+an `Rplot.pdf` will be saved in the current working directory.
 
 The `key-value` pair in the json structure can be specified as follows:
 
@@ -64,6 +72,8 @@ The `key-value` pair in the json structure can be specified as follows:
 	"interactive": false
 }
 ```
+The static and interactive results will be stored in the `filename` path with automatically generated names.
+
 
 
 ## Installation in R
