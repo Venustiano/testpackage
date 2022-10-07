@@ -9,7 +9,7 @@ histogram(parametersfile)
 \arguments{
 \item{parametersfile}{a json file containing metadata to create a histogram
 
-"filename": <string>
+"filename": <string, required>
 
 "variables": <array of strings representing column names>
 
@@ -27,17 +27,19 @@ histogram(parametersfile)
 
 "alpha": <number, between 0 and 1>
 
-"height": <number, in cm of the output visualization file>
-
-"width": <number, in cm of the output visualization file>
-
 "title": <string, title of the plot>
 
 "caption": <string, caption of the plot>
 
 "rotxlabs": <number, rotate x labels in grades>
 
-"save": <boolean, save the file?>
+"save": <object, composed of 'save', 'height', 'width' and 'device'>
+
+"save": <boolean, save the file?
+
+"height": <number, in cm of the output visualization file>
+
+"width": <number, in cm of the output visualization file>
 
 "device": <enum, ["eps", "ps", "tex", "pdf", "jpeg", "tiff", "png", "bmp", "svg"]>
 
