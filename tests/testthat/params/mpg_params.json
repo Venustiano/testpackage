@@ -1,0 +1,6 @@
+{
+    "filename": "data/ggplotmpg.csv",
+    "y_variable": "hwy",
+    "facet_row": "class",
+    "facet_column": "trans"
+}
