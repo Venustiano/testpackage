@@ -33,7 +33,7 @@ example, assuming that the files `violin_parameters_iris.json`
 {
 	"filename": "iris.csv",
 	"variables": [],
-	"y_variable": "sepal_length"
+	"y_variable": "sepal.length"
 }
 ```
 and `iris.csv` are in the current working directory, running the command
