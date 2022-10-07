@@ -9,11 +9,13 @@
     "facet_column": "None",
     "bin_width": 1,
     "alpha": 0.5,
-	  "height": 10,
-	  "width": 15,
 	  "title": "Title",
 	  "caption":"Caption",
-    "save": false,
-    "device":"pdf",
+    "save": {
+      "save": false,
+  	  "height": 10,
+	    "width": 15,
+      "device":"pdf"
+    },
     "interactive":true
 }

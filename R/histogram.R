@@ -6,17 +6,17 @@
 #'
 #' "filename": <string, required>
 #'
-#' "variables": <array of strings representing column names>
+#' "variables": <array, strings representing column names>
 #'
-#' "y_variable": <string variable to be plotted on the vertical direction>
+#' "y_variable": <string, required variable to be plotted on the vertical direction>
 #'
-#' "group": <string, column variable>
+#' "group": <string, a column variable>
 #'
 #' "colour": <string, a column variable or a predefined color in colors()>
 #'
-#' "fill": <string, column variable>
+#' "fill": <string, a column variable>
 #'
-#' "facet_row": <string, variable name>
+#' "facet_row": <string, a variable name>
 #'
 #' "facet_column": <string, variable name>
 #'
@@ -73,22 +73,36 @@ histogram <- function(parametersfile){
     stop(paste("'",lp$y_variable,"' must be a column in",lp$filename))
   }
 
+  print(paste("--",class(lp$alpha)))
+
   p <- paste(
-    "ggplot2::ggplot(cols, ggplot2::aes(","x = lp$y_variable, ",
-    if (lp$colour %in% list_factors) {
-      "color = lp$colour, fill = lp$colour)) + "
-    } else {
-      ")) + "
-    },
-    if (lp$colour %in% grDevices::colors()) {
-      paste("ggplot2::geom_histogram(color='lp$colour', fill='lp$colour', ",
-            "binwidth = lp$binwidth)", sep = "")
-    } else {
-      paste("ggplot2::geom_histogram(position = 'identity', alpha = lp$alpha, ",
-          "binwidth = lp$binwidth)",  sep = "")
-    },
-    " + ggplot2::theme_bw() + ",
-    "ggplot2::labs(title = 'lp$title', caption = 'lp$caption') + ",
+    "ggplot2::ggplot(cols, ggplot2::aes(","x = lp$y_variable ",
+    if (!is.null(lp$colour) && lp$colour %in% list_factors)
+      ", color = lp$colour, fill = lp$colour",
+    ")) + ggplot2::geom_histogram(",
+    if (!is.null(lp$fill))
+      if (! lparams$fill %in% fnames)
+        "fill = 'lp$fill', ",
+    if (!is.null(lp$colour))
+      if (! lp$colour %in% fnames)
+        "colour = 'lp$colour', ",
+    if (!is.null(lp$position))
+      "position = lp$position, ",
+    if (!is.null(lp$alpha))
+      "alpha = lp$alpha, ",
+    if (!is.null(lp$linetype))
+      "linetype = lp$linetype, ",
+    if (!is.null(lp$size))
+      "size = lp$size, ",
+    if (!is.null(lp$weight))
+      "width = lp$weight",
+    ") + ggplot2::theme_bw() + ",
+    "ggplot2::labs(",
+    if (!is.null(lp$title))
+      "title = 'lp$title'",
+    if (!is.null(lp$caption))
+      ", caption = 'lp$caption'",
+    ") + ",
     "ggplot2::theme(plot.title = ggplot2::element_text(hjust = 0.5))",
     sep =""
     )
@@ -115,13 +129,13 @@ histogram <- function(parametersfile){
   p <- eval(parse(text = p))
 
   now <- Sys.time()
-  if (lp$save==TRUE){
-    outputfile <- file.path(paste0(lp$filename,"-hist-",format(now, "%Y%m%d_%H%M%S"),".",lp$device))
-    ggplot2::ggsave(outputfile,plot=p, device= lp$device,  width = lp$width,
-                    height =lp$height, units = "cm")
+  if (!is.null(lp$save) && lp$save$save == TRUE){
+    outputfile <- file.path(paste0(lp$filename,"-hist-",format(now, "%Y%m%d_%H%M%S"),".",lp$save$device))
+    ggplot2::ggsave(outputfile,plot=p, device= lp$save$device,  width = lp$save$width,
+                    height =lp$save$height, units = "cm")
     print(paste("Histogram saved in: ",outputfile))
   }
-  if (lp$interactive == TRUE) {
+  if (!is.null(lp$interactive) && lp$interactive == TRUE) {
     print("Creating interactive plot ...")
     outputfile <- file.path(paste0(lp$filename,"-hist-",format(now, "%Y%m%d_%H%M%S"),".html"))
     ip <- plotly::ggplotly(p)
