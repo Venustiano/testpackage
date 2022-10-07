@@ -12,16 +12,22 @@ if (length(args)==0) {
   switch( plottype,
           "histogram" = if (args[2] == "help")
                           ?histogram
-                        else
-                          histogram(parameters),
+                        else {
+                          print(paste("Opening  parameters file:",parameters))
+                          histogram(parameters)
+                        },
           "violin" = if (args[2] == "help")
                       ?cm_ggviolin
-                     else
-                        cm_ggviolin(parameters),
+                     else {
+                       print(paste("Opening  parameters file:",parameters))
+                        cm_ggviolin(parameters)
+                     },
           "pca" = if (args[2] == "help")
                     ?pcaproj
-                  else
-                    pcaproj(parameters),
+                  else {
+                    pcaproj(parameters)
+                    print(paste("Opening parameters file:",parameters))
+                  },
           print(paste0("'",plottype,"' plot is not found in this package"))
           )
 }
