@@ -189,14 +189,14 @@ cm_ggviolin <- function(fileparams) {
     }
   now <- Sys.time()
   if (!is.null(lparams$save) && lparams$save$save == TRUE){
-    outputfile <- file.path(paste0(lparams$filename,"-pca-",format(now, "%Y%m%d_%H%M%S"),".",lparams$save$device))
+    outputfile <- file.path(paste0(lparams$filename,"-violin-",format(now, "%Y%m%d_%H%M%S"),".",lparams$save$device))
     ggplot2::ggsave(outputfile,plot=p, device= lparams$save$device,  width = lparams$save$width,
                     height =lparams$save$height, units = "cm")
     print(paste("Projection saved in: ",outputfile))
   }
   if (!is.null(lparams$interactive) && lparams$interactive == TRUE) {
     print("Creating interactive plot ...")
-    outputfile <- file.path(paste0(lparams$filename,"-pca-",format(now, "%Y%m%d_%H%M%S"),".html"))
+    outputfile <- file.path(paste0(lparams$filename,"-violin-",format(now, "%Y%m%d_%H%M%S"),".html"))
     ip <- plotly::ggplotly(p,width=800,height=600)
     htmlwidgets::saveWidget(ip, outputfile)
     print(paste("Interactive pca plot in: ",outputfile))
