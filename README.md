@@ -24,23 +24,32 @@ docker run --rm venustiano/cds:rvispack-0.1.0
 ### Parameters
 
 The functions implemented in this package receive two
-parameters. First, the data visualization function to be exceuted,
+parameters. First, the data visualization function to be executed,
 namely, `histogram`, `pca` and `violin`. Second, a json file structure
 including the required information to create the visualization. For
-example, assuming that the files `violin_parameters_iris.json` 
+example, assuming that the files `violin_parameters_iris.json`
 
 ```json
 {
 	"filename": "iris.csv",
-	"variables: [],
+	"variables": [],
 	"y_variable": "sepal_length"
 }
 ```
 and `iris.csv` are in the current working directory, running the command
 
+#### Linux and MacOS
+
 ```sh
 docker run --rm -v "$PWD":/app/data venustiano/cds:rvispack-0.1.0 violin violin_parameters_iris.json
 ```
+
+#### Windows powershell
+
+```
+docker run --rm -v ${PWD}:/app/data venustiano/cds:rvispack-0.1.0 violin violin_parameters_iris.json
+```
+
 
 will produce a violin plot. 
 

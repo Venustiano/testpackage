@@ -56,7 +56,7 @@ histogram <- function(parametersfile){
     stop("The json parameters file does not meet the schema")
   }
 
-  print("Print creating the histogram ...")
+  print("Creating the histogram ...")
 
   print(lp$variables)
 
@@ -81,7 +81,7 @@ histogram <- function(parametersfile){
       ", color = lp$colour, fill = lp$colour",
     ")) + ggplot2::geom_histogram(",
     if (!is.null(lp$fill))
-      if (! lparams$fill %in% fnames)
+      if (! lp$fill %in% fnames)
         "fill = 'lp$fill', ",
     if (!is.null(lp$colour))
       if (! lp$colour %in% fnames)
