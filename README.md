@@ -148,4 +148,4 @@ We can run
 docker run --rm -v "$PWD":/app/data venustiano/cds:rvispack-0.1.0 violin mpg_params.json
 ```
 
-![mpgviolin](tests/testthat/data/ggplotmpg.csv-violin-20221009_203930.png)
+![alt mpgviolin](tests/testthat/results/ggplotmpg.csv-violin-20221009_203930.png)
