@@ -52,7 +52,7 @@ list_params <- function(fileparams,jsonschema){
 #'
 #' "boxplot": <object, composed of 'addboxplot' and 'width'>
 #'
-#'    "addboxplot: <boolean, add box plot>
+#'    "addboxplot": <boolean, add box plot>
 #'
 #'    "width": <number, width of the boxplot>
 #'
