@@ -52,7 +52,7 @@ list_params <- function(fileparams,jsonschema){
 #'
 #' "boxplot": <object, composed of 'addboxplot' and 'width'>
 #'
-#'    "addboxplot: <boolean, add box plot>
+#'    "addboxplot": <boolean, add box plot>
 #'
 #'    "width": <number, width of the boxplot>
 #'
@@ -181,12 +181,14 @@ cm_ggviolin <- function(fileparams) {
                                         labels = lparams$color_manual$labels)
   }
 
-  if (!is.null(lparams$boxplot) && lparams$boxplot$addboxplot == TRUE)
-    if (!is.null(lparams$boxplot$width))
-      p <- p + ggplot2::geom_boxplot(width = lparams$boxplot$width,alpha=0.2)
-    else {
-      p <- p + ggplot2::geom_boxplot(width = 0.1,alpha=0.2)
+  if (!is.null(lparams$boxplot) && lparams$boxplot$addboxplot == TRUE){
+    if (!is.null(lparams$boxplot$width)){
+      print(paste("Adding boxplots: \n width:",lparams$boxplot$width))
+      p <- p + ggplot2::geom_boxplot(colour="#636363", width = lparams$boxplot$width,alpha=0.2)
+    } else {
+      p <- p + ggplot2::geom_boxplot(colour="#636363", width = 0.1,alpha=0.2)
     }
+  }
   now <- Sys.time()
   if (!is.null(lparams$save) && lparams$save$save == TRUE){
     outputfile <- file.path(paste0(lparams$filename,"-violin-",format(now, "%Y%m%d_%H%M%S"),".",lparams$save$device))
