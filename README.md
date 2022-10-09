@@ -130,15 +130,15 @@ in the same folder. The latter file can be found in
     "fill": "class",
     "rotxlabs": 45,
     "boxplot": {
-    	"addboxplot": true,
+		"addboxplot": true,
 	    "width": 0.1
     },
-	  "save":{
-		  "save": true,
-		  "width": 15,
-		  "height": 10,
-		  "device": "png"
-	  }
+	"save":{
+	  "save": true,
+	  "width": 15,
+	  "height": 10,
+	  "device": "png"
+	}
 }
 ```
 
