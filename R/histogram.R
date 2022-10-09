@@ -81,10 +81,10 @@ histogram <- function(parametersfile){
       ", color = lp$colour, fill = lp$colour",
     ")) + ggplot2::geom_histogram(",
     if (!is.null(lp$fill))
-      if (! lp$fill %in% fnames)
+      if (! lp$fill %in% list_factors)
         "fill = 'lp$fill', ",
     if (!is.null(lp$colour))
-      if (! lp$colour %in% fnames)
+      if (! lp$colour %in% list_factors)
         "colour = 'lp$colour', ",
     if (!is.null(lp$position))
       "position = lp$position, ",

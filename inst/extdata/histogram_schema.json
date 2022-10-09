@@ -80,7 +80,7 @@
       "exclusiveMinimum": true,
       "maximum": 360
 	  },
-"save": {
+    "save": {
 	    "title": "Save",
 	    "type": "object",
 	    "properties" : {
