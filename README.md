@@ -149,3 +149,13 @@ docker run --rm -v "$PWD":/app/data venustiano/cds:rvispack-0.1.0 violin mpg_par
 ```
 
 ![alt mpgviolin](tests/testthat/results/ggplotmpg.csv-violin-20221009_203930.png)
+
+### Using singularity
+
+```bash
+singularity build pcr.sif docker://venustiano/cds:rvispack-0.1.0
+./pcr.sif
+wget https://raw.githubusercontent.com/Venustiano/testpackage/main/tests/testthat/data/ggplotmpg.csv
+wget https://raw.githubusercontent.com/Venustiano/testpackage/main/tests/testthat/params/mpg_params.json
+./pcr.sif violin mpg_params.json
+```
