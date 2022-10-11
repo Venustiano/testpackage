@@ -7,12 +7,14 @@
 	"fill": "species",
 	"facet_row": "speciesx",
 	"alpha": 0.5,
+	"position":"dodge",
+	"linetype": "dashed",
 	"color_manual": {
 	  "values": ["#8dd3c7","#ffffb3","#bebada"],
 	  "breaks": ["versicolor","virginica","setosa"]
 	},
 	"boxplot":{
-	  "addboxplot": false,
+	  "addboxplot": true,
 	  "width": 0.1
 	},
 	"title": "Iris plot",

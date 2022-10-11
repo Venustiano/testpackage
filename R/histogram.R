@@ -56,24 +56,20 @@ histogram <- function(parametersfile){
     stop("The json parameters file does not meet the schema")
   }
 
-  print("Creating the histogram ...")
-
-  print(lp$variables)
+  cat("Creating the histogram ...\n")
 
   cols <- read_data(lp$filename,lp$variables)
 
   str(cols)
   list_factors <- select_factors(cols)
-  print(class(list_factors))
+  cat("Categorical columns:",list_factors,"\n")
 
   list_numeric <- select_numeric(cols)
-  print(list_numeric)
+  cat("Numeric columns:",list_numeric,"\n")
 
   if (! lp$y_variable %in% colnames(cols) ) {
     stop(paste("'",lp$y_variable,"' must be a column in",lp$filename))
   }
-
-  print(paste("--",class(lp$alpha)))
 
   p <- paste(
     "ggplot2::ggplot(cols, ggplot2::aes(","x = lp$y_variable ",
@@ -125,7 +121,7 @@ histogram <- function(parametersfile){
       )
     )
   p <- stringr::str_replace_all(p, ",\n    \\)", "\n  \\)")
-  print(p)
+  cat(p,"\n")
   p <- eval(parse(text = p))
 
   now <- Sys.time()
@@ -133,10 +129,10 @@ histogram <- function(parametersfile){
     outputfile <- file.path(paste0(lp$filename,"-hist-",format(now, "%Y%m%d_%H%M%S"),".",lp$save$device))
     ggplot2::ggsave(outputfile,plot=p, device= lp$save$device,  width = lp$save$width,
                     height =lp$save$height, units = "cm")
-    print(paste("Histogram saved in: ",outputfile))
+    cat(paste("Histogram saved in: ",outputfile),"\n")
   }
   if (!is.null(lp$interactive) && lp$interactive == TRUE) {
-    print("Creating interactive plot ...")
+    cat("Creating interactive plot ...\n")
     outputfile <- file.path(paste0(lp$filename,"-hist-",format(now, "%Y%m%d_%H%M%S"),".html"))
     ip <- plotly::ggplotly(p)
     htmlwidgets::saveWidget(ip, outputfile)
