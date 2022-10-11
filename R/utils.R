@@ -20,9 +20,12 @@ validate_parameters <- function(params,pschema="pca_projection_schema.json"){
 # #' @examples
 read_data <- function(filename,select_columns){
   # Check for empty list
-  if (length(select_columns)<1)
+  if (length(select_columns)<1) {
     select_columns = NULL
-  print(select_columns)
+    cat("Reading all columns\n")
+  } else {
+    cat("Selected columns",select_columns,"\n")
+  }
   tryCatch(cols <- data.table::fread(filename,select = select_columns),
            error = function(c) {
              c$message <- paste0(c$message, " (in ", filename, ")")
@@ -87,7 +90,7 @@ add_facets <- function(splot,lpars,factornames){
   else
     facets <- paste(facets,".")
 
-  print(facets)
+  cat(paste("Facets:",facets),"\n")
   if (facets != ". ~ .")
     splot <- paste(splot, "+ ggplot2::facet_grid(", facets, ")")
   splot

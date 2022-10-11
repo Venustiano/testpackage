@@ -122,11 +122,11 @@ cm_ggviolin <- function(fileparams) {
       if (! lparams$colour %in% fnames)
         "colour = 'lparams$colour', ",
     if (!is.null(lparams$position))
-      "position = lparam$position, ",
+      "position = 'lparams$position', ",
     if (!is.null(lparams$alpha))
       "alpha = lparams$alpha, ",
     if (!is.null(lparams$linetype))
-      "linetype = lparams$linetype, ",
+      "linetype = 'lparams$linetype', ",
     if (!is.null(lparams$size))
       "size = lparams$size, ",
     if (!is.null(lparams$weight))
@@ -167,13 +167,13 @@ cm_ggviolin <- function(fileparams) {
     )
   )
   p <- stringr::str_replace_all(p, ",\n    \\)", "\n  \\)")
-  print(p)
+  cat(p,"\n")
   p <- eval(parse(text = p))
 
   # manual color
   if (!is.null(lparams$color_manual)) {
     vals <- lparams$color_manual$values
-    print(vals)
+    cat("colors:",vals,"\n")
     p <- p + ggplot2::scale_color_manual(values = vals,
                                         breaks = NULL)
     p <- p + ggplot2::scale_fill_manual(values = vals,
@@ -183,7 +183,7 @@ cm_ggviolin <- function(fileparams) {
 
   if (!is.null(lparams$boxplot) && lparams$boxplot$addboxplot == TRUE){
     if (!is.null(lparams$boxplot$width)){
-      print(paste("Adding boxplots: \n width:",lparams$boxplot$width))
+      cat(paste("Adding boxplots: \n width:",lparams$boxplot$width),"\n")
       p <- p + ggplot2::geom_boxplot(colour="#636363", width = lparams$boxplot$width,alpha=0.2)
     } else {
       p <- p + ggplot2::geom_boxplot(colour="#636363", width = 0.1,alpha=0.2)
@@ -194,15 +194,15 @@ cm_ggviolin <- function(fileparams) {
     outputfile <- file.path(paste0(lparams$filename,"-violin-",format(now, "%Y%m%d_%H%M%S"),".",lparams$save$device))
     ggplot2::ggsave(outputfile,plot=p, device= lparams$save$device,  width = lparams$save$width,
                     height =lparams$save$height, units = "cm")
-    print(paste("Projection saved in: ",outputfile))
+    cat(paste("Plot saved in: ",outputfile),"\n")
   }
   if (!is.null(lparams$interactive) && lparams$interactive == TRUE) {
-    print("Creating interactive plot ...")
+    cat("Creating plot ...","\n")
     outputfile <- file.path(paste0(lparams$filename,"-violin-",format(now, "%Y%m%d_%H%M%S"),".html"))
     ip <- plotly::ggplotly(p,width=800,height=600)
     htmlwidgets::saveWidget(ip, outputfile)
-    print(paste("Interactive pca plot in: ",outputfile))
+    cat(paste("Interactive plot in: ",outputfile),"\n")
   }
-  print(paste0("object '",class(p)[2],"' successfully created"))
+  cat(paste0("Object '",class(p)[2],"' successfully created"),"\n")
   return(p)
 }

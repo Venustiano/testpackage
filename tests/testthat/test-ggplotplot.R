@@ -3,6 +3,7 @@ test_that("use", {
   # expect_type(lp,"list")
   expect_warning(p <- cm_ggviolin("params/violinparams_test.json"))
   expect_s3_class(p,"ggplot")
+  print(p)
   # p <- cm_ggviolin("../../../data/iris_vio_params.json")
   # expect_s3_class(p,"ggplot")
   # lp <- list_params("params/BPermits_parameters.json","violin_schema.json")
