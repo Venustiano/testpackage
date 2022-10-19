@@ -1,10 +1,12 @@
 test_that("Validating columns", {
-  # why the 'expect_error'  messages must be the same
+  lp <- validate_json_file("params/mpg_params.json")
+  expect_type(lp,"list")
 
+  validate_parameters("params/mpg_params.json","histogram_schema.json")
   # expect_error(histogram("params/hist_incorrect-col_id.json"),
   #              "' length ' must be a column in data/iris.csv")
 
-  p <- histogram("params/mpg_params.json")
+  p <- histogram(lp)
   print(p)
   expect_s3_class(p,"ggplot")
   }

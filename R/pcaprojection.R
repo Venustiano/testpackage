@@ -3,7 +3,7 @@
 #'
 #' PCA projection
 #'
-#' @param parametersfile list of parameters in a json file
+#' @param lp list of parameters in a json file
 #'
 #' "filename": <string, csv file including more than 3 columns>
 #'
@@ -33,18 +33,18 @@
 #' @export
 #'
 # #' @examples
-pcaproj <- function(parametersfile){
+pcaproj <- function(lp){
   # Projection based on principal component analysis
   # reading list of parameters lp
-  lp <- validate_json_file(parametersfile)
+  # lp <- validate_json_file(parametersfile)
+  #
+  # res <- validate_parameters(parametersfile)
+  #
+  # if (res==FALSE) {
+  #   stop("The json parameters file does not meet the schema")
+  # }
 
-  res <- validate_parameters(parametersfile)
-
-  if (res==FALSE) {
-    stop("The json parameters file does not meet the schema")
-  }
-
-  print("Print creating the PCA projection ...")
+  cat("Print creating the PCA projection ...")
   colorear <- lp$colour
 
   if (colorear == ""){
@@ -84,14 +84,14 @@ pcaproj <- function(parametersfile){
     outputfile <- file.path(paste0(lp$filename,"-pca-",format(now, "%Y%m%d_%H%M%S"),".",lp$device))
     ggplot2::ggsave(outputfile,plot=p, device= lp$device,  width = lp$width,
                     height =lp$height, units = "cm")
-    print(paste("Projection saved in: ",outputfile))
+    cat(paste("Projection saved in: ",outputfile))
   }
   if (lp$interactive == TRUE) {
-    print("Creating interactive plot ...")
+    cat("Creating interactive plot ...")
     outputfile <- file.path(paste0(lp$filename,"-pca-",format(now, "%Y%m%d_%H%M%S"),".html"))
     ip <- plotly::ggplotly(p)
     htmlwidgets::saveWidget(ip, outputfile)
-    print(paste("Interactive pca plot in: ",outputfile))
+    cat(paste("Interactive pca plot in: ",outputfile))
   }
   p
 }

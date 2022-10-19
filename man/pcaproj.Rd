@@ -4,10 +4,10 @@
 \alias{pcaproj}
 \title{Title}
 \usage{
-pcaproj(parametersfile)
+pcaproj(lp)
 }
 \arguments{
-\item{parametersfile}{list of parameters in a json file
+\item{lp}{list of parameters in a json file
 
 "filename": <string, csv file including more than 3 columns>
 

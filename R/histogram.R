@@ -2,7 +2,7 @@
 #'
 #' Creates a histogram
 #'
-#' @param parametersfile a json file containing metadata to create a histogram
+#' @param lp a list of parameters created using the `validate_json_file` function
 #'
 #' "filename": <string, required>
 #'
@@ -46,15 +46,15 @@
 #' @export
 #'
 # #' @examples
-histogram <- function(parametersfile){
+histogram <- function(lp){
 
   # reading list of parameters lp
-  lp <- validate_json_file(parametersfile)
-  res <- validate_parameters(parametersfile,pschema="histogram_schema.json")
+  # lp <- validate_json_file(parametersfile)
+  # res <- validate_parameters(parametersfile,pschema="histogram_schema.json")
 
-  if (res==FALSE) {
-    stop("The json parameters file does not meet the schema")
-  }
+  # if (res==FALSE) {
+  #   stop("The json parameters file does not meet the schema")
+  # }
 
   cat("Creating the histogram ...\n")
 
