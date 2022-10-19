@@ -1,16 +1,16 @@
-list_params <- function(fileparams,jsonschema){
-  # reading and validating list of parameters lp
-  lp <- validate_json_file(fileparams)
-  # validating lp against the jsonschema
-  res <- validate_parameters(fileparams,pschema=jsonschema)
-  return(lp)
-}
+# list_params <- function(fileparams,jsonschema){
+#   # reading and validating list of parameters lp
+#   lp <- validate_json_file(fileparams)
+#   # validating lp against the jsonschema
+#   res <- validate_parameters(fileparams,pschema=jsonschema)
+#   return(lp)
+# }
 
 #' cm_ggviolin
 #'
 #' Creates violin plot(s) using ggplot
 #'
-#' @param fileparams a json file containing metadata to create a violin plot
+#' @param lparams a list of parameters created using the `validate_json_file` function
 #'
 #' "filename": <string, required>
 #'
@@ -56,7 +56,7 @@ list_params <- function(fileparams,jsonschema){
 #'
 #'    "width": <number, width of the boxplot>
 #'
-#' "title": <string, title of the plot>
+#' "title": <string, title of thehttps://github.com/badges/shields/issues/7583 plot>
 #'
 #' "caption": <string, caption of the plot>
 #'
@@ -81,12 +81,12 @@ list_params <- function(fileparams,jsonschema){
 #'
 # #' @examples
 
-cm_ggviolin <- function(fileparams) {
+cm_ggviolin <- function(lparams) {
 
   # reading and validating list of parameters lp
-  lparams <- validate_json_file(fileparams)
+  # lparams <- validate_json_file(fileparams)
   # validating lparams against the violin json schema
-  res <- validate_parameters(fileparams,pschema="violin_schema.json")
+  # res <- validate_parameters(fileparams,pschema="violin_schema.json")
 
   dt <- read_data(lparams$filename,lparams$variables)
   # factor variables

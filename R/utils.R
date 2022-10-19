@@ -1,6 +1,8 @@
-#' Validate that the parameters meet the required schema
+#' Validate that a  json file meets a required schema
 #'
-#' @param lparams The list of parameters to be validated
+#' @param params a json file to be validated against a schema
+#' @param pschema a predefined json schema
+#'
 #' @export
 validate_parameters <- function(params,pschema="pca_projection_schema.json"){
   schemafile <- system.file("extdata", pschema, package = "pcaprojection")
@@ -38,6 +40,14 @@ read_data <- function(filename,select_columns){
   # print(cols)
 }
 
+#' This function validates a json structure
+#'
+#' @param fileparams a json structure stored in a file name to be validated
+#'
+#' @return an R list of parameters extracted from the json structure
+#' @export
+#'
+# #' @examples
 validate_json_file <- function(fileparams) {
   if (file.exists(fileparams)){
     tryCatch(lp <-  jsonlite::fromJSON(fileparams),

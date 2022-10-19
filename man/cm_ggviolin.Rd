@@ -4,10 +4,10 @@
 \alias{cm_ggviolin}
 \title{cm_ggviolin}
 \usage{
-cm_ggviolin(fileparams)
+cm_ggviolin(lparams)
 }
 \arguments{
-\item{fileparams}{a json file containing metadata to create a violin plot
+\item{lparams}{a list of parameters created using the `validate_json_file` function
 
 "filename": <string, required>
 
@@ -49,11 +49,11 @@ cm_ggviolin(fileparams)
 
 "boxplot": <object, composed of 'addboxplot' and 'width'>
 
-   "addboxplot: <boolean, add box plot>
+   "addboxplot": <boolean, add box plot>
 
    "width": <number, width of the boxplot>
 
-"title": <string, title of the plot>
+"title": <string, title of thehttps://github.com/badges/shields/issues/7583 plot>
 
 "caption": <string, caption of the plot>
 

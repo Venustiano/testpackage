@@ -2,13 +2,15 @@
 % Please edit documentation in R/utils.R
 \name{validate_parameters}
 \alias{validate_parameters}
-\title{Validate that the parameters meet the required schema}
+\title{Validate that a  json file meets a required schema}
 \usage{
 validate_parameters(params, pschema = "pca_projection_schema.json")
 }
 \arguments{
-\item{lparams}{The list of parameters to be validated}
+\item{params}{a json file to be validated against a schema}
+
+\item{pschema}{a predefined json schema}
 }
 \description{
-Validate that the parameters meet the required schema
+Validate that a  json file meets a required schema
 }

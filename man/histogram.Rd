@@ -4,24 +4,24 @@
 \alias{histogram}
 \title{Title}
 \usage{
-histogram(parametersfile)
+histogram(lp)
 }
 \arguments{
-\item{parametersfile}{a json file containing metadata to create a histogram
+\item{lp}{a list of parameters created using the `validate_json_file` function
 
 "filename": <string, required>
 
-"variables": <array of strings representing column names>
+"variables": <array, strings representing column names>
 
-"y_variable": <string variable to be plotted on the vertical direction>
+"y_variable": <string, required variable to be plotted on the vertical direction>
 
-"group": <string, column variable>
+"group": <string, a column variable>
 
 "colour": <string, a column variable or a predefined color in colors()>
 
-"fill": <string, column variable>
+"fill": <string, a column variable>
 
-"facet_row": <string, variable name>
+"facet_row": <string, a variable name>
 
 "facet_column": <string, variable name>
 
