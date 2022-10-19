@@ -1,7 +1,7 @@
 
-#' Title
-#'
 #' PCA projection
+#'
+#' Projection based on Principal Component Analysis
 #'
 #' @param lp list of parameters in a json file
 #'
@@ -34,15 +34,6 @@
 #'
 # #' @examples
 pcaproj <- function(lp){
-  # Projection based on principal component analysis
-  # reading list of parameters lp
-  # lp <- validate_json_file(parametersfile)
-  #
-  # res <- validate_parameters(parametersfile)
-  #
-  # if (res==FALSE) {
-  #   stop("The json parameters file does not meet the schema")
-  # }
 
   cat("Print creating the PCA projection ...")
   colorear <- lp$colour

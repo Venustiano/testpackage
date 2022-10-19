@@ -2,7 +2,7 @@
 % Please edit documentation in R/pcaprojection.R
 \name{pcaproj}
 \alias{pcaproj}
-\title{Title}
+\title{PCA projection}
 \usage{
 pcaproj(lp)
 }
@@ -37,5 +37,5 @@ pcaproj(lp)
 a ggplot object
 }
 \description{
-PCA projection
+Projection based on Principal Component Analysis
 }
