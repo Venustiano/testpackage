@@ -1,12 +1,4 @@
-# list_params <- function(fileparams,jsonschema){
-#   # reading and validating list of parameters lp
-#   lp <- validate_json_file(fileparams)
-#   # validating lp against the jsonschema
-#   res <- validate_parameters(fileparams,pschema=jsonschema)
-#   return(lp)
-# }
-
-#' cm_ggviolin
+#' Violin plots
 #'
 #' Creates violin plot(s) using ggplot
 #'
@@ -76,7 +68,7 @@
 #'
 #' Further information can be found in \href{https://ggplot2.tidyverse.org/reference/geom_violin.html}{geom_violin} documentation.
 #'
-#' @return a ggplot object and if indicated in 'fileparams' stores the plot in a file (s)
+#' @return a ggplot object and if indicated in 'lparams' stores the plot in a file (s)
 #' @export
 #'
 # #' @examples

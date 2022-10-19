@@ -2,7 +2,7 @@
 % Please edit documentation in R/histogram.R
 \name{histogram}
 \alias{histogram}
-\title{Title}
+\title{Histogram}
 \usage{
 histogram(lp)
 }
@@ -48,8 +48,8 @@ histogram(lp)
 Further information can be found in [geom_histogram](https://ggplot2.tidyverse.org/reference/geom_histogram.html)}
 }
 \value{
-a ggplot object and if indicated in 'parametersfile' stores the plot in a file (s)
+a ggplot object and if indicated in 'lp' stores the plot in a file (s)
 }
 \description{
-Creates a histogram
+Creates a ggplot histogram
 }

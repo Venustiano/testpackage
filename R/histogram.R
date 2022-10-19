@@ -1,6 +1,6 @@
-#' Title
+#' Histogram
 #'
-#' Creates a histogram
+#' Creates a ggplot histogram
 #'
 #' @param lp a list of parameters created using the `validate_json_file` function
 #'
@@ -42,19 +42,11 @@
 #'
 #' Further information can be found in [geom_histogram](https://ggplot2.tidyverse.org/reference/geom_histogram.html)
 #'
-#' @return a ggplot object and if indicated in 'parametersfile' stores the plot in a file (s)
+#' @return a ggplot object and if indicated in 'lp' stores the plot in a file (s)
 #' @export
 #'
 # #' @examples
 histogram <- function(lp){
-
-  # reading list of parameters lp
-  # lp <- validate_json_file(parametersfile)
-  # res <- validate_parameters(parametersfile,pschema="histogram_schema.json")
-
-  # if (res==FALSE) {
-  #   stop("The json parameters file does not meet the schema")
-  # }
 
   cat("Creating the histogram ...\n")
 
