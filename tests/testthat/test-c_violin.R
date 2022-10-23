@@ -2,7 +2,7 @@ test_that("use", {
   lp <- validate_json_file("params/violinparams_test.json")
   validate_parameters("params/violinparams_test.json","violin_schema.json")
   expect_type(lp,"list")
-  expect_warning(p <- cm_ggviolin(lp))
+  expect_warning(p <- c_violin(lp))
   expect_s3_class(p,"ggplot")
   print(p)
   # p <- cm_ggviolin("../../../data/iris_vio_params.json")

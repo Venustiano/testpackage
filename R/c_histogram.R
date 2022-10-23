@@ -46,7 +46,7 @@
 #' @export
 #'
 # #' @examples
-histogram <- function(lp){
+c_histogram <- function(lp){
 
   cat("Creating the histogram ...\n")
 

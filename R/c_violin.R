@@ -73,7 +73,7 @@
 #'
 # #' @examples
 
-cm_ggviolin <- function(lparams) {
+c_violin <- function(lparams) {
 
   # reading and validating list of parameters lp
   # lparams <- validate_json_file(fileparams)

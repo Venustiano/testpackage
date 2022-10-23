@@ -33,7 +33,7 @@
 #' @export
 #'
 # #' @examples
-pcaproj <- function(lp){
+c_pcaproj <- function(lp){
 
   cat("Print creating the PCA projection ...")
   colorear <- lp$colour
